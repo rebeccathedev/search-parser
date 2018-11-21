@@ -4,7 +4,7 @@ namespace peckrob\SearchParser\SearchParser\Tests;
 
 use peckrob\SearchParser\SearchParser;
 use peckrob\SearchParser\Transforms\Eloquent;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
 
@@ -13,13 +13,13 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
      */
     public function testParse($query, $return, $default_field = 'foo') {
 
-        if (!class_exists('Illuminate\Database\Eloquent\Model')) {
+        if (!class_exists('Illuminate\Database\Eloquent\Builder')) {
             $this->markTestSkipped(
                 'Eloquent is not installed.'
               );
         }
 
-        $mock = $this->getMockBuilder(Model::class)
+        $mock = $this->getMockBuilder(Builder::class)
             ->setMethods(['where', 'orWhere', 'whereNot', 'whereBetween', 'whereNotBetween'])
             ->getMock();
 
@@ -60,7 +60,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('foo@example.com')]
+                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo('foo@example.com')]
                     ]
                 ]
             ],
@@ -70,7 +70,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'whereNot',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('foo@example.com')]
+                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo('foo@example.com')]
                     ]
                 ]
             ],
@@ -90,7 +90,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('foo'), $this->equalTo('foo bar')]
+                        'with' => [$this->equalTo('foo'), $this->equalTo('='), $this->equalTo('foo bar')]
                     ]
                 ]
             ],
@@ -101,8 +101,8 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                         'method' => 'where',
                         'count' => 2,
                         'withConsecutive' => [
-                            [$this->equalTo('from'), $this->equalTo('foo@example.com')],
-                            [$this->equalTo('foo'), $this->equalTo('foo bar')]
+                            [$this->equalTo('from'), $this->equalTo('='), $this->equalTo('foo@example.com')],
+                            [$this->equalTo('foo'), $this->equalTo('='), $this->equalTo('foo bar')]
                         ]
                     ]
                 ]
@@ -113,12 +113,12 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('foo@example.com')]
+                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo('foo@example.com')]
                     ],
                     [
                         'method' => 'orWhere',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('bar@example.com')]
+                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo('bar@example.com')]
                     ]
                 ]
             ],

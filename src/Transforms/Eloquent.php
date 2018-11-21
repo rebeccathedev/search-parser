@@ -4,13 +4,13 @@ namespace peckrob\SearchParser\Transforms;
 
 use peckrob\SearchParser\SearchQuery;
 use peckrob\SearchParser\SearchQueryComponent;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * A class that converts a SearchQuery to a Laravel Eloquent model query. 
+ * A class that converts a SearchQuery to a Laravel Eloquent Builder query. 
  */
 class Eloquent {
-    public function transform(SearchQuery $query, string $default_field, Model $model) {
+    public function transform(SearchQuery $query, string $default_field, Builder $model) {
         // Loop through the query components.
         foreach ($query as $component) {
 
@@ -25,18 +25,31 @@ class Eloquent {
                 if (is_array($value)) {
                     $first = true;
                     foreach ($value as $inner_value) {
+
+                        $comparator = '=';
+                        if (strstr($inner_value, '*')) {
+                            $comparator = 'like';
+                            $inner_value = \str_replace("*", "%", $inner_value);
+                        }
+
                         if ($first) {
-                            $model->where($field, $inner_value);
+                            $model->where($field, $comparator, $inner_value);
                             $first = false;
                         } else {
-                            $model->orWhere($field, $inner_value);
+                            $model->orWhere($field, $comparator, $inner_value);
                         }
                     }
                 } else if (is_string($value)) {
+                    $comparator = '=';
+                    if (strstr($value, '*')) {
+                        $comparator = 'like';
+                        $value = \str_replace("*", "%", $value);
+                    }
+
                     if ($component->negate) {
-                        $model->whereNot($field, $value);
+                        $model->whereNot($field, $comparator, $value);
                     } else {
-                        $model->where($field, $value);
+                        $model->where($field, $comparator, $value);
                     }
                 }
                 
