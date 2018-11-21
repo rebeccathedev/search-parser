@@ -1,6 +1,6 @@
 SearchParser
 ============
-SearchParser is a parser that converts a freeform query into an intermediate object, that can then be converted to query many backends (SQL, ElasticSearch, etc). It supports a freeform natural-language search as commonly found on many sites across the web.
+SearchParser is a parser that converts a freeform query into an intermediate object, that can then be converted to query many backends (SQL, ElasticSearch, etc). It supports a faceted language search as commonly found on many sites across the web.
 
 For example, the following query:
 
