@@ -3,7 +3,7 @@
 namespace rebeccathedev\SearchParser\SearchParser\Tests;
 
 use rebeccathedev\SearchParser\SearchParser;
-use rebeccathedev\SearchParser\Transforms\Eloquent;
+use rebeccathedev\SearchParser\Transforms\Eloquent\Eloquent as ElqouentTransform;
 use Illuminate\Database\Eloquent\Builder;
 
 class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
@@ -11,7 +11,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
     /**
      * @dataProvider dataProvider
      */
-    public function testParse($query, $return, $default_field = 'foo') {
+    public function testParse($query, $return, $loose_mode = false, $default_field = 'foo') {
 
         if (!class_exists('Illuminate\Database\Eloquent\Builder')) {
             $this->markTestSkipped(
@@ -43,8 +43,9 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
         if (is_bool($data)) {
             $this->assertEquals($data, $return);
         } else {
-            $transform = new Eloquent();
-            $transform->transform($data, $default_field, $mock);
+            $transform = new ElqouentTransform($default_field, $mock);
+            $transform->looseMode = $loose_mode;
+            $transform->transform($data);
         }
     }
 
@@ -68,9 +69,9 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                 'query' => '!from:me@rebeccapeck.org',
                 'return' => [
                     [
-                        'method' => 'whereNot',
+                        'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')]
+                        'with' => [$this->equalTo('from'), $this->equalTo('!='), $this->equalTo(me@rebeccapeck.org')]
                     ]
                 ]
             ],
@@ -121,6 +122,17 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                         'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')]
                     ]
                 ]
+            ],
+            [
+                'query' => '"foo bar"',
+                'return' => [
+                    [
+                        'method' => 'where',
+                        'count' => 1,
+                        'with' => [$this->equalTo('foo'), $this->equalTo('like'), $this->equalTo('%foo bar%')]
+                    ]
+                ],
+                'loose_mode' => true
             ],
         ];
     }

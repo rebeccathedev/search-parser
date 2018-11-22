@@ -74,4 +74,47 @@ class SearchQuery implements \Iterator {
     public function valid() {
         return isset($this->data[$this->position]);
     }
+
+    /**
+     * Merges another SearchQuery with this one.
+     *
+     * @param SearchQuery $query
+     * @return void
+     */
+    public function merge(SearchQuery $query) {
+        foreach($query as $component) {
+            $this->push($component);
+        }
+    }
+
+    /**
+     * Removes a given item from the query.
+     *
+     * @param SearchQueryComponent $item
+     * @return void
+     */
+    public function remove(SearchQueryComponent $item) {
+        foreach ($this->data as $key => $component) {
+            if ($component == $item) {
+                unset($this->data[$key]);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Replaces a given item with a new one.
+     *
+     * @param SearchQueryComponent $old
+     * @param SearchQueryComponent $new
+     * @return void
+     */
+    public function replace(SearchQueryComponent $old, SearchQueryComponent $new) {
+        foreach ($this->data as $key => $component) {
+            if ($component == $old) {
+                $this->data[$key] = $new;
+                return;
+            }
+        }
+    }
 }

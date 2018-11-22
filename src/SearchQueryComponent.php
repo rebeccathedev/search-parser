@@ -52,4 +52,17 @@ class SearchQueryComponent {
      * @var boolean
      */
     public $negate = false;
+
+    /**
+     * Returns whether this component is "empty".
+     *
+     * @return boolean
+     */
+    public function isEmpty() {
+        return empty($this->type) && 
+            empty($this->field) &&
+            empty($this->value) &&
+            empty($this->firstRangeValue) &&
+            empty($this->secondRangeValue);
+    }
 }
