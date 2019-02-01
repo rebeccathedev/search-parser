@@ -6,14 +6,9 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    <groups>
-        <exclude>
-            <group>functional</group>
-        </exclude>
-    </groups>
-    <filter>
-        <whitelist>
-            <directory suffix="Test.php">./src</directory>
-        </whitelist>
-    </filter>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./src</directory>
+		</whitelist>
+	</filter>
 </phpunit>
