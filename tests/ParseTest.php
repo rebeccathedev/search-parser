@@ -7,18 +7,16 @@ use peckrob\SearchParser\SearchQuery;
 use peckrob\SearchParser\SearchQueryComponent;
 
 class ParseTest extends \PHPUnit\Framework\TestCase {
-
     /**
      * @dataProvider dataProvider
      */
     public function testParse($query, $return) {
-
-        $parser = new SearchParser();
+        $parser        = new SearchParser();
         $parsed_result = $parser->parse($query);
 
         if (empty($return)) {
             $this->assertEquals($return, $parsed_result);
-        } else if (is_array($return)) {
+        } elseif (is_array($return)) {
             $query = new SearchQuery();
 
             foreach ($return as $ret) {
@@ -36,74 +34,153 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
     public function dataProvider() {
         return [
             [
-                'query' => '',
+                'query'  => '',
                 'return' => false
             ],
             [
-                'query' => 'from:foo@example.com',
+                'query'  => 'from:foo@example.com',
                 'return' => [
                     [
-                        'type' => 'field',
+                        'type'  => 'field',
                         'field' => 'from',
                         'value' => 'foo@example.com'
                     ]
                 ]
             ],
             [
-                'query' => '!from:foo@example.com',
+                'query'  => '!from:foo@example.com',
                 'return' => [
                     [
-                        'type' => 'field',
-                        'field' => 'from',
-                        'value' => 'foo@example.com',
+                        'type'   => 'field',
+                        'field'  => 'from',
+                        'value'  => 'foo@example.com',
                         'negate' => true
                     ]
                 ]
             ],
             [
-                'query' => 'between:1-10',
+                'query'  => 'between:1-10',
                 'return' => [
                     [
-                        'type' => 'range',
-                        'field' => 'between',
-                        'firstRangeValue' => '1',
+                        'type'             => 'range',
+                        'field'            => 'between',
+                        'firstRangeValue'  => '1',
                         'secondRangeValue' => '10'
                     ]
                 ]
             ],
             [
-                'query' => '"foo bar"',
+                'query'  => '"foo bar"',
                 'return' => [
                     [
-                        'type' => 'text',
+                        'type'  => 'text',
                         'field' => '',
                         'value' => 'foo bar'
                     ]
                 ]
             ],
             [
-                'query' => 'from:foo@example.com "foo bar"',
+                'query'  => 'from:foo@example.com "foo bar"',
                 'return' => [
                     [
-                        'type' => 'field',
+                        'type'  => 'field',
                         'field' => 'from',
                         'value' => 'foo@example.com'
                     ],
                     [
-                        'type' => 'text',
+                        'type'  => 'text',
                         'field' => '',
                         'value' => 'foo bar'
                     ]
                 ]
             ],
             [
-                'query' => 'from:foo@example.com,bar@example.com',
+                'query'  => 'from:foo@example.com,bar@example.com',
                 'return' => [
                     [
-                        'type' => 'field',
+                        'type'  => 'field',
                         'field' => 'from',
                         'value' => ['foo@example.com', 'bar@example.com']
                     ]
+                ]
+            ],
+            [
+                'query'  => '+"foo bar"',
+                'return' => [
+                    [
+                        'type'    => 'text',
+                        'field'   => '',
+                        'value'   => 'foo bar',
+                        'require' => true
+                    ]
+                ]
+            ],
+            [
+                'query'  => '-"foo bar"',
+                'return' => [
+                    [
+                        'type'   => 'text',
+                        'field'  => '',
+                        'value'  => 'foo bar',
+                        'negate' => true
+                    ]
+                ]
+            ],
+            [
+                'query'  => '!"foo bar"',
+                'return' => [
+                    [
+                        'type'   => 'text',
+                        'field'  => '',
+                        'value'  => 'foo bar',
+                        'negate' => true
+                    ]
+                ]
+            ],
+            [
+                'query'  => '-foo +bar',
+                'return' => [
+                    [
+                        'type'   => 'text',
+                        'field'  => '',
+                        'value'  => 'foo',
+                        'negate' => true
+                    ],
+                    [
+                        'type'    => 'text',
+                        'field'   => '',
+                        'value'   => 'bar',
+                        'require' => true
+                    ]
+                ]
+            ],
+            [
+                'query'  => '-foo +bar !"baz meef" +"feep feep"',
+                'return' => [
+                    [
+                        'type'   => 'text',
+                        'field'  => '',
+                        'value'  => 'foo',
+                        'negate' => true
+                    ],
+                    [
+                        'type'    => 'text',
+                        'field'   => '',
+                        'value'   => 'bar',
+                        'require' => true
+                    ],
+                    [
+                        'type'   => 'text',
+                        'field'  => '',
+                        'value'  => 'baz meef',
+                        'negate' => true
+                    ],
+                    [
+                        'type'    => 'text',
+                        'field'   => '',
+                        'value'   => 'feep feep',
+                        'require' => true
+                    ],
                 ]
             ],
         ];

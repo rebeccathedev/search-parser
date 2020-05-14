@@ -39,7 +39,7 @@ class SearchParser {
         
         // This regex tokenizes string into discrete parts. Word boundaries,
         // strings and field names are all respected.
-        $regex = '!([^\s"\']+:["\'].*?["\']|[^\s"\']+|["\'][^"]*["\'])!';
+        $regex = '!([\+\!-]["\'].*?["\']|[^\s"\']+:["\'].*?["\']|[^\s"\']+|["\'][^"]*["\'])!';
         if (preg_match_all($regex, $query, $matches)) {
 
             foreach ($matches[0] as $match) {
@@ -84,10 +84,14 @@ class SearchParser {
         // Create a new component.
         $component = new SearchQueryComponent();
 
-        // If it starts with a !, that means we are negating whatever
-        // that token is.
-        if (substr($part, 0, 1) == '!') {
+        // If it starts with a ! or a -, that means we are negating whatever
+        // that token is. If it starts with a +, that means we are requiring it.
+        // Calling code can intepret those in any way.
+        if (substr($part, 0, 1) == '!' || substr($part, 0, 1) == '-') {
             $component->negate = true;
+            $part = substr($part, 1, strlen($part) - 1);
+        } else if (substr($part, 0, 1) == "+") {
+            $component->require = true;
             $part = substr($part, 1, strlen($part) - 1);
         }
 
