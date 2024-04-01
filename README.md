@@ -330,7 +330,7 @@ Tests are included. `phpunit` is a require-dev in this project, so you will need
 
 ## Author
 
-Rob Peck
+Rebecca Peck
 
 ## License
 
