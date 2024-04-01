@@ -54,6 +54,13 @@ class SearchQueryComponent {
     public $negate = false;
 
     /**
+     * A boolean that requires this query component.
+     *
+     * @var boolean
+     */
+    public $require = false;
+
+    /**
      * Returns whether this component is "empty".
      *
      * @return boolean
