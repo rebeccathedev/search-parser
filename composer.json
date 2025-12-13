@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.2"
     },
     "suggest": {
         "illuminate/database": "Required to use the Eloquent query builder."
