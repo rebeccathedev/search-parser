@@ -211,11 +211,11 @@ See `src/Transforms/SQL/Hashtag.php` for a working example.
 
 ### ⚠️ Security Note
 
-**Important:** The SQL transform escapes *values* but not *field names*. Always whitelist allowed fields before passing queries to transforms. Never trust user input for field names.
+**Important:** The SQL transform escapes *values* but not *field names*. Always allowlist allowed fields before passing queries to transforms. Never trust user input for field names.
 
 ### 🎯 FieldFilter
 
-Whitelist allowed fields for security:
+Allowlist allowed fields for security:
 
 ```php
 use RebeccaTheDev\SearchParser\Filters\{Filter, FieldFilter};
