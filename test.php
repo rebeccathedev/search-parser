@@ -2,19 +2,19 @@
 
 include 'vendor/autoload.php';
 $query = 'from:me@rebeccapeck.org "bar baz" !meef date:2018/01/01-2018/08/01 #hashtag';
-$q = new \rebeccathedev\SearchParser\SearchParser();
-$q->addParser(new \rebeccathedev\SearchParser\Parsers\Hashtag());
+$q = new \RebeccaTheDev\SearchParser\SearchParser();
+$q->addParser(new \RebeccaTheDev\SearchParser\Parsers\Hashtag());
 $x = $q->parse($query);
 
 $pdo = new PDO("sqlite:/tmp/foo.sql");
-$transform = new \rebeccathedev\SearchParser\Transforms\SQL\SQL("default_field", $pdo);
-$transform->addComponentTransform(new \rebeccathedev\SearchParser\Transforms\SQL\Hashtag("default_field", $pdo));
+$transform = new \RebeccaTheDev\SearchParser\Transforms\SQL\SQL("default_field", $pdo);
+$transform->addComponentTransform(new \RebeccaTheDev\SearchParser\Transforms\SQL\Hashtag("default_field", $pdo));
 $where = $transform->transform($x);
 
 var_dump($where);
 
-/*$filter = new \rebeccathedev\SearchParser\Filters\Filter();
-$field_filter = new \rebeccathedev\SearchParser\Filters\FieldFilter();
+/*$filter = new \RebeccaTheDev\SearchParser\Filters\Filter();
+$field_filter = new \RebeccaTheDev\SearchParser\Filters\FieldFilter();
 $field_filter->validFields = ['from'];
 $filter->addFilter($field_filter);
 $filter->filter($x);*/
@@ -24,10 +24,10 @@ print_r($x);
 /*
 $pdo = new PDO("sqlite:/tmp/foo.sql");
 
-$transform = new \rebeccathedev\SearchParser\Transforms\SQL\SQL("default_field", $pdo);
+$transform = new \RebeccaTheDev\SearchParser\Transforms\SQL\SQL("default_field", $pdo);
 $transform->looseMode = true;
 
-$hashtag_transform = new \rebeccathedev\SearchParser\Transforms\SQL\Hashtag("default_field", $pdo);
+$hashtag_transform = new \RebeccaTheDev\SearchParser\Transforms\SQL\Hashtag("default_field", $pdo);
 $transform->addComponentTransform($hashtag_transform);
 
 $where = $transform->transform($x);

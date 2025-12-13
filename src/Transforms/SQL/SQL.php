@@ -1,11 +1,11 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms\SQL;
+namespace RebeccaTheDev\SearchParser\Transforms\SQL;
 
-use rebeccathedev\SearchParser\Transforms\Transform;
-use rebeccathedev\SearchParser\Transforms\Transformation;
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\Transforms\Transform;
+use RebeccaTheDev\SearchParser\Transforms\Transformation;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
  * A class that converts a SearchQuery to a SQL query. Mostly used as an example
@@ -19,7 +19,7 @@ class SQL extends Transform {
      * @param SearchQuery   $query          The search query.
      * @return string
      */
-    public function transform(SearchQuery $query) {
+    public function transform(SearchQuery $query): mixed {
 
         // Holds all the ANDS.
         $ands = [];
@@ -75,7 +75,7 @@ class SQL extends Transform {
      * @param object $context
      * @return array
      */
-    public function transformComponent(SearchQueryComponent $component, string $default_field = null, $context = null) {
+    public function transformComponent(SearchQueryComponent $component, ?string $default_field = null, $context = null) {
 
         $transformation = new Transformation();
 

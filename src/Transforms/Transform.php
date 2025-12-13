@@ -1,70 +1,41 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms;
+namespace RebeccaTheDev\SearchParser\Transforms;
 
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
- * An abstract class that defines a transform. You must extend this class to 
+ * An abstract class that defines a transform. You must extend this class to
  * write transforms.
  */
 abstract class Transform implements TransformsComponents {
 
     /**
-     * Loose mode will treat every text query as a LIKE query.
-     *
-     * @var boolean
-     */
-    public $looseMode = false;
-
-    /**
      * Holds any sub-transforms.
      *
-     * @var array
+     * @var array<TransformsComponents>
      */
-    protected $transforms = [];
+    protected array $transforms = [];
 
     /**
-     * Holds the default field 
-     *
-     * @var string
+     * The constructor with promoted properties.
      */
-    protected $defaultField = null;
-
-    /**
-     * An optional object context that can be passed to the parser.
-     *
-     * @var object
-     */
-    protected $context = null;
-
-    /**
-     * The constructor.
-     *
-     * @param string $default_field The default field for text queries.
-     * @param object $context       An optional object context.
-     */
-    public function __construct(string $default_field = null, $context = null) {
-        $this->defaultField = $default_field;
-        $this->context = $context;
-    }
+    public function __construct(
+        protected ?string $defaultField = null,
+        protected mixed $context = null,
+        public bool $looseMode = false
+    ) {}
 
     /**
      * Custom transformers must implement the transform method.
-     *
-     * @param SearchQuery $query    An instance of SearchQuery.
-     * @return mixed
      */
-    abstract public function transform(SearchQuery $query);
+    abstract public function transform(SearchQuery $query): mixed;
 
     /**
-     * Adds a custom transform to the 
-     *
-     * @param Transform $transform
-     * @return void
+     * Adds a custom transform to the transforms list.
      */
-    public function addComponentTransform(TransformsComponents $transform) {
+    public function addComponentTransform(TransformsComponents $transform): void {
         $this->transforms[] = $transform;
     }
 }

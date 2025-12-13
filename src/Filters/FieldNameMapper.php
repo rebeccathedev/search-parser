@@ -1,8 +1,8 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Filters;
+namespace RebeccaTheDev\SearchParser\Filters;
 
-use rebeccathedev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQuery;
 
 /**
  * A filter that can map field names to other names.

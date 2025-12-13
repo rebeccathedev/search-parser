@@ -1,10 +1,10 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms\SQL;
+namespace RebeccaTheDev\SearchParser\Transforms\SQL;
 
-use rebeccathedev\SearchParser\Transforms\TransformsComponents;
-use rebeccathedev\SearchParser\Transforms\Transformation;
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\Transforms\TransformsComponents;
+use RebeccaTheDev\SearchParser\Transforms\Transformation;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
  * An example class that transforms our custom hashtag type.
@@ -28,7 +28,7 @@ class Hashtag implements TransformsComponents {
      * @param object $context
      * @return void
      */
-    public function transformComponent(SearchQueryComponent $component, string $default_field = null, $context = null) {
+    public function transformComponent(SearchQueryComponent $component, ?string $default_field = null, $context = null) {
         $transformation = new Transformation();
 
         if ($component->type == "hashtag") {

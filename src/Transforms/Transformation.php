@@ -1,6 +1,6 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms;
+namespace RebeccaTheDev\SearchParser\Transforms;
 
 /**
  * Transformation is a simple message bag like class that can encapsulate 

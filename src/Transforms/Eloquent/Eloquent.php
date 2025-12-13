@@ -1,11 +1,11 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms\Eloquent;
+namespace RebeccaTheDev\SearchParser\Transforms\Eloquent;
 
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
-use rebeccathedev\SearchParser\Transforms\Transform;
-use rebeccathedev\SearchParser\Transforms\Transformation;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\Transforms\Transform;
+use RebeccaTheDev\SearchParser\Transforms\Transformation;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -19,7 +19,7 @@ class Eloquent extends Transform {
      * @param SearchQuery $query
      * @return Builder
      */
-    public function transform(SearchQuery $query) {
+    public function transform(SearchQuery $query): mixed {
         // Loop through the query components.
         foreach ($query as $component) {
             // Call the user defined transforms if any.
@@ -69,7 +69,7 @@ class Eloquent extends Transform {
      * @param object $context
      * @return void
      */
-    public function transformComponent(SearchQueryComponent $component, string $default_field = null, $context = null) {
+    public function transformComponent(SearchQueryComponent $component, ?string $default_field = null, $context = null) {
 
         $transformation = new Transformation();
 

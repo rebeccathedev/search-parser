@@ -1,6 +1,6 @@
 <?php
 
-namespace rebeccathedev\SearchParser;
+namespace RebeccaTheDev\SearchParser;
 
 /**
  * A class that holds a tokenized query.
@@ -35,25 +35,25 @@ class SearchQuery implements \Iterator {
      *
      * @return void
      */
-    public function rewind() {
+    public function rewind(): void {
         $this->position = 0;
     }
 
     /**
      * Gets the current item.
      *
-     * @return void
+     * @return mixed
      */
-    public function current() {
+    public function current(): mixed {
         return $this->data[$this->position];
     }
 
     /**
      * Gets the current key.
      *
-     * @return void
+     * @return mixed
      */
-    public function key() {
+    public function key(): mixed {
         return $this->position;
     }
 
@@ -62,16 +62,16 @@ class SearchQuery implements \Iterator {
      *
      * @return void
      */
-    public function next() {
+    public function next(): void {
         ++$this->position;
     }
 
     /**
      * Whether the pointer location is valid.
      *
-     * @return void
+     * @return bool
      */
-    public function valid() {
+    public function valid(): bool {
         return isset($this->data[$this->position]);
     }
 

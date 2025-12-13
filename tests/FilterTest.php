@@ -1,19 +1,18 @@
 <?php
 
-namespace rebeccathedev\SearchParser\SearchParser\Tests;
+namespace RebeccaTheDev\SearchParser\SearchParser\Tests;
 
-use rebeccathedev\SearchParser\SearchParser;
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
-use rebeccathedev\SearchParser\Filters\Filter;
-use rebeccathedev\SearchParser\Filters\FieldFilter;
-use rebeccathedev\SearchParser\Filters\FieldNameMapper;
+use RebeccaTheDev\SearchParser\SearchParser;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\Filters\Filter;
+use RebeccaTheDev\SearchParser\Filters\FieldFilter;
+use RebeccaTheDev\SearchParser\Filters\FieldNameMapper;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class FilterTest extends \PHPUnit\Framework\TestCase {
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testFilter($query, $component_filter_type, $filter_args, $return) {
 
         $parser = new SearchParser();
@@ -43,11 +42,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($query, $result);
     }
 
-    public function dataProvider() {
+    public static function dataProvider() {
         return [
             [
                 'query' => 'from:me@rebeccapeck.org to:me@rebeccapeck.org',
-                'filter' => 'rebeccathedev\SearchParser\Filters\FieldFilter',
+                'component_filter_type' => 'RebeccaTheDev\SearchParser\Filters\FieldFilter',
                 'filter_args' => [
                     'validFields' => ['from']
                 ],
@@ -61,7 +60,7 @@ class FilterTest extends \PHPUnit\Framework\TestCase {
             ],
             [
                 'query' => 'from:me@rebeccapeck.org',
-                'filter' => 'rebeccathedev\SearchParser\Filters\FieldNameMapper',
+                'component_filter_type' => 'RebeccaTheDev\SearchParser\Filters\FieldNameMapper',
                 'filter_args' => [
                     'mappingFields' => [
                         'from' => 'recipient'

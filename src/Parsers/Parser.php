@@ -1,6 +1,8 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Parsers;
+namespace RebeccaTheDev\SearchParser\Parsers;
+
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
  * An interface that defines how user-defined parsers work.
@@ -8,11 +10,8 @@ namespace rebeccathedev\SearchParser\Parsers;
 interface Parser {
 
     /**
-     * User defined parsers must implement this method and must return a 
+     * User defined parsers must implement this method and must return a
      * SearchQueryComponent object.
-     *
-     * @param string $part
-     * @return SearchQueryComponent 
      */
-    public function parsePart(string $part);
+    public function parsePart(string $part): SearchQueryComponent;
 }

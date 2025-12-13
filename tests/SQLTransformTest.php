@@ -1,29 +1,26 @@
 <?php
 
-namespace rebeccathedev\SearchParser\SearchParser\Tests;
+namespace RebeccaTheDev\SearchParser\SearchParser\Tests;
 
-use rebeccathedev\SearchParser\SearchParser;
-use rebeccathedev\SearchParser\Transforms\SQL\SQL;
+use RebeccaTheDev\SearchParser\SearchParser;
+use RebeccaTheDev\SearchParser\Transforms\SQL\SQL;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class SQLTranformTest extends \PHPUnit\Framework\TestCase {
+class SQLTransformTest extends \PHPUnit\Framework\TestCase {
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testParse($query, $return, $loose_mode = false, $default_field = 'foo') {
 
         // Mock a PDO stub to do escaping.
         $stub = $this->getMockBuilder(\PDO::class)
                      ->disableOriginalConstructor()
                      ->disableOriginalClone()
-                     ->disableArgumentCloning()
-                     ->disallowMockingUnknownTypes()
                      ->getMock();
 
         $stub->method('quote')
-             ->will($this->returnCallback(function($e) {
+             ->willReturnCallback(function($e) {
                  return "'$e'";
-             }));
+             });
 
         $parser = new SearchParser();
         $search = $parser->parse($query);
@@ -38,7 +35,7 @@ class SQLTranformTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function dataProvider() {
+    public static function dataProvider() {
         return [
             [
                 'query' => '',

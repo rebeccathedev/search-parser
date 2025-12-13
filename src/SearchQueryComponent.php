@@ -1,72 +1,56 @@
 <?php
 
-namespace rebeccathedev\SearchParser;
+namespace RebeccaTheDev\SearchParser;
 
 /**
- * A class that holds a query componet.
+ * A class that holds a query component.
  */
 class SearchQueryComponent {
-    // Some constants to make live easier.
-    const RANGE = "range";
-    const FIELD = "field";
-    const TEXT = "text";
+    // Constants for component types
+    public const RANGE = "range";
+    public const FIELD = "field";
+    public const TEXT = "text";
 
     /**
      * A string that holds one of the constants above.
-     *
-     * @var string
      */
-    public $type;
+    public string $type = '';
 
     /**
-     * A strig that holds the field name.
-     *
-     * @var string
+     * A string that holds the field name.
      */
-    public $field;
+    public string $field = '';
 
     /**
-     * A string that holds the field value.
-     *
-     * @var string
+     * A string, array, or null that holds the field value.
      */
-    public $value;
+    public string|array|null $value = null;
 
     /**
      * A string that holds the first ranged value in a range query.
-     *
-     * @var string
      */
-    public $firstRangeValue;
+    public ?string $firstRangeValue = null;
 
     /**
      * A string that holds the second range value in a range query.
-     *
-     * @var string
      */
-    public $secondRangeValue;
+    public ?string $secondRangeValue = null;
 
     /**
      * A boolean that negates this query component.
-     *
-     * @var boolean
      */
-    public $negate = false;
+    public bool $negate = false;
 
     /**
      * A boolean that requires this query component.
-     *
-     * @var boolean
      */
-    public $require = false;
+    public bool $require = false;
 
     /**
      * Returns whether this component is "empty".
-     *
-     * @return boolean
      */
-    public function isEmpty() {
-        return empty($this->type) && 
+    public function isEmpty(): bool {
+        return empty($this->type) &&
             empty($this->field) &&
             empty($this->value) &&
             empty($this->firstRangeValue) &&

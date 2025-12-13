@@ -1,16 +1,15 @@
 <?php
 
-namespace rebeccathedev\SearchParser\SearchParser\Tests;
+namespace RebeccaTheDev\SearchParser\SearchParser\Tests;
 
-use rebeccathedev\SearchParser\SearchParser;
-use rebeccathedev\SearchParser\Transforms\Eloquent\Eloquent as ElqouentTransform;
+use RebeccaTheDev\SearchParser\SearchParser;
+use RebeccaTheDev\SearchParser\Transforms\Eloquent\Eloquent as ElqouentTransform;
 use Illuminate\Database\Eloquent\Builder;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
+class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
 
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testParse($query, $return, $loose_mode = false, $default_field = 'foo') {
 
         if (!class_exists('Illuminate\Database\Eloquent\Builder')) {
@@ -20,20 +19,28 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
         }
 
         $mock = $this->getMockBuilder(Builder::class)
-            ->setMethods(['where', 'orWhere', 'whereNot', 'whereBetween', 'whereNotBetween'])
+            ->onlyMethods(['where', 'orWhere', 'whereNot', 'whereBetween', 'whereNotBetween'])
             ->getMock();
 
         if (is_array($return)) {
             foreach ($return as $r) {
                 $m = $mock->expects($this->exactly($r['count']))
                     ->method($r['method']);
-                
+
                 if (!empty($r['with'])) {
-                    \call_user_func_array([$m, 'with'], $r['with']);
+                    $expectations = array_map(function($value) {
+                        return $this->equalTo($value);
+                    }, $r['with']);
+                    \call_user_func_array([$m, 'with'], $expectations);
                 } else if (!empty($r['withConsecutive'])) {
-                    \call_user_func_array([$m, 'withConsecutive'], $r['withConsecutive']);
+                    $consecutiveExpectations = array_map(function($callArgs) {
+                        return array_map(function($value) {
+                            return $this->equalTo($value);
+                        }, $callArgs);
+                    }, $r['withConsecutive']);
+                    \call_user_func_array([$m, 'withConsecutive'], $consecutiveExpectations);
                 }
-                
+
             }
         }
 
@@ -49,7 +56,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function dataProvider() {
+    public static function dataProvider() {
         return [
             [
                 'query' => '',
@@ -61,7 +68,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')]
+                        'with' => ['from', '=', me@rebeccapeck.org']
                     ]
                 ]
             ],
@@ -71,7 +78,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('!='), $this->equalTo(me@rebeccapeck.org')]
+                        'with' => ['from', '!=', me@rebeccapeck.org']
                     ]
                 ]
             ],
@@ -81,7 +88,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'whereBetween',
                         'count' => 1,
-                        'with' => [$this->equalTo('range'), $this->equalTo(['1', '10'])]
+                        'with' => ['range', ['1', '10']]
                     ]
                 ]
             ],
@@ -91,7 +98,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('foo'), $this->equalTo('='), $this->equalTo('foo bar')]
+                        'with' => ['foo', '=', 'foo bar']
                     ]
                 ]
             ],
@@ -102,8 +109,8 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                         'method' => 'where',
                         'count' => 2,
                         'withConsecutive' => [
-                            [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')],
-                            [$this->equalTo('foo'), $this->equalTo('='), $this->equalTo('foo bar')]
+                            ['from', '=', me@rebeccapeck.org'],
+                            ['foo', '=', 'foo bar']
                         ]
                     ]
                 ]
@@ -114,12 +121,12 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')]
+                        'with' => ['from', '=', me@rebeccapeck.org']
                     ],
                     [
                         'method' => 'orWhere',
                         'count' => 1,
-                        'with' => [$this->equalTo('from'), $this->equalTo('='), $this->equalTo(me@rebeccapeck.org')]
+                        'with' => ['from', '=', me@rebeccapeck.org']
                     ]
                 ]
             ],
@@ -129,7 +136,7 @@ class EloquentTranformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => [$this->equalTo('foo'), $this->equalTo('like'), $this->equalTo('%foo bar%')]
+                        'with' => ['foo', 'like', '%foo bar%']
                     ]
                 ],
                 'loose_mode' => true

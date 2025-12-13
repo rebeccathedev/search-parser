@@ -1,15 +1,14 @@
 <?php
 
-namespace rebeccathedev\SearchParser\SearchParser\Tests;
+namespace RebeccaTheDev\SearchParser\SearchParser\Tests;
 
-use rebeccathedev\SearchParser\SearchParser;
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\SearchParser;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ParseTest extends \PHPUnit\Framework\TestCase {
-    /**
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
     public function testParse($query, $return) {
         $parser        = new SearchParser();
         $parsed_result = $parser->parse($query);
@@ -31,7 +30,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function dataProvider() {
+    public static function dataProvider() {
         return [
             [
                 'query'  => '',

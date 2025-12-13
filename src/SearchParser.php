@@ -1,8 +1,8 @@
 <?php
 
-namespace rebeccathedev\SearchParser;
+namespace RebeccaTheDev\SearchParser;
 
-use rebeccathedev\SearchParser\Parsers\Parser;
+use RebeccaTheDev\SearchParser\Parsers\Parser;
 
 /**
  * A class that parses queries into tokens.
@@ -13,22 +13,21 @@ class SearchParser {
      * An array that holds any additional parsers to run after the main parser
      * has run.
      *
-     * @var array
+     * @var array<Parser>
      */
-    private $parsers = [];
+    private array $parsers = [];
 
     /**
      * Converts a query string using a standardized vocabulary into a parsed
      * Query object.
      *
-     * @param string $query A query to covert.
-     * @return mixed Either a SearchQuery object or false if it couldn't parse
-     *               anything. Really false should only ever be returned for an
-     *               empty string.
+     * @return SearchQuery|false Either a SearchQuery object or false if it couldn't parse
+     *                           anything. Really false should only ever be returned for an
+     *                           empty string.
      */
-    public function parse(string $query) {
+    public function parse(string $query): SearchQuery|false {
 
-        // The only case we should ever return false is if we had an empty 
+        // The only case we should ever return false is if we had an empty
         // string. Pretty much anything else is a valid search.
         if (empty($query)) {
             return false;
@@ -36,7 +35,7 @@ class SearchParser {
 
         // Create a new SearchQuery object.
         $search = new SearchQuery();
-        
+
         // This regex tokenizes string into discrete parts. Word boundaries,
         // strings and field names are all respected.
         $regex = '!([\+\!-]["\'].*?["\']|[^\s"\']+:["\'].*?["\']|[^\s"\']+|["\'][^"]*["\'])!';
@@ -52,7 +51,7 @@ class SearchParser {
                         $component = $parser->parsePart($match);
 
                         // If we were able to parse something for this part, add
-                        // it to the SearchQuery and continue with the next 
+                        // it to the SearchQuery and continue with the next
                         // part.
                         if (!$component->isEmpty()) {
                             $search->push($component);
@@ -76,24 +75,27 @@ class SearchParser {
 
     /**
      * Parses a part of a query into a SearchQueryComponent
-     *
-     * @param string $part  A query part.
-     * @return SearchQueryComponent
      */
-    public function parsePart(string $part) {
+    public function parsePart(string $part): SearchQueryComponent {
         // Create a new component.
         $component = new SearchQueryComponent();
 
         // If it starts with a ! or a -, that means we are negating whatever
         // that token is. If it starts with a +, that means we are requiring it.
-        // Calling code can intepret those in any way.
-        if (substr($part, 0, 1) == '!' || substr($part, 0, 1) == '-') {
-            $component->negate = true;
-            $part = substr($part, 1, strlen($part) - 1);
-        } else if (substr($part, 0, 1) == "+") {
-            $component->require = true;
-            $part = substr($part, 1, strlen($part) - 1);
-        }
+        // Calling code can interpret those in any way.
+        $firstChar = $part[0] ?? '';
+
+        match ($firstChar) {
+            '!', '-' => [
+                $component->negate = true,
+                $part = substr($part, 1)
+            ],
+            '+' => [
+                $component->require = true,
+                $part = substr($part, 1)
+            ],
+            default => null
+        };
 
         // Now, we look for field names and corresponding values.
         if (preg_match('/(.*?):["\']?(.*?)(?:-(.*))?["\']?$/', $part, $inner_matches)) {
@@ -105,7 +107,7 @@ class SearchParser {
                 $component->type = SearchQueryComponent::RANGE;
                 $component->firstRangeValue = $inner_matches[2];
                 $component->secondRangeValue = $inner_matches[3];
-            
+
             // Otherwise, it is a standard value query.
             } else {
                 $component->type = SearchQueryComponent::FIELD;
@@ -113,15 +115,11 @@ class SearchParser {
                 // If a value has a comma in it, that means we want to
                 // get any of those values, so we store them as an array
                 // on the value.
-                if (strstr($inner_matches[2], ',')) {
-                    $component->value = explode(',', $inner_matches[2]);
-
-                // Othwerwise, just a standard value.
-                } else {
-                    $component->value = $inner_matches[2];
-                }
+                $component->value = str_contains($inner_matches[2], ',')
+                    ? explode(',', $inner_matches[2])
+                    : $inner_matches[2];
             }
-            
+
         // This is just a standard text lookup.
         } else {
             $part = str_replace(['"', "'"], "", $part);
@@ -133,12 +131,9 @@ class SearchParser {
     }
 
     /**
-     * Adds a parser to run after 
-     *
-     * @param Parser $parser
-     * @return void
+     * Adds a parser to run after the main parser.
      */
-    public function addParser(Parser $parser) {
+    public function addParser(Parser $parser): void {
         $this->parsers[] = $parser;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Transforms;
+namespace RebeccaTheDev\SearchParser\Transforms;
 
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
  * An interface that defines a custom component transformer.
@@ -18,5 +18,5 @@ interface TransformsComponents {
      * @param object $context
      * @return Transformation
      */
-    public function transformComponent(SearchQueryComponent $component, string $default_field = null, $context = null);
+    public function transformComponent(SearchQueryComponent $component, ?string $default_field = null, $context = null);
 }

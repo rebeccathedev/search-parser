@@ -1,9 +1,9 @@
 <?php
 
-namespace rebeccathedev\SearchParser\Parsers;
+namespace RebeccaTheDev\SearchParser\Parsers;
 
-use rebeccathedev\SearchParser\SearchQuery;
-use rebeccathedev\SearchParser\SearchQueryComponent;
+use RebeccaTheDev\SearchParser\SearchQuery;
+use RebeccaTheDev\SearchParser\SearchQueryComponent;
 
 /**
  * An example parser that will parse out social media style hashtags.
@@ -12,11 +12,8 @@ class Hashtag implements Parser {
 
     /**
      * Parses a part.
-     *
-     * @param string $part A query part
-     * @return SearchQueryComponent
      */
-    public function parsePart(string $part) {
+    public function parsePart(string $part): SearchQueryComponent {
         $component = new SearchQueryComponent();
 
         if (preg_match('!\#(.*)!', $part, $match)) {
