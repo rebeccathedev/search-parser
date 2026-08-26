@@ -9,7 +9,7 @@ A powerful search query parser that transforms freeform search queries into stru
 - 🔌 Extensible parser system for custom query types
 - 🔒 Field filtering and mapping for security
 - 🔎 Loose mode for fuzzy matching
-- 🚀 PHP 8.2+ with modern type safety
+- 🚀 PHP 8.5+ with modern type safety
 
 ## 🚀 Quick Example
 
@@ -89,7 +89,7 @@ RebeccaTheDev\SearchParser\SearchQuery Object
 composer require rebeccathedev/search-parser
 ```
 
-**Requirements:** PHP 8.2+
+**Requirements:** PHP 8.5+
 
 No external dependencies required for core functionality. Eloquent transform requires `illuminate/database`.
 

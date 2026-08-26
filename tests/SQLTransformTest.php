@@ -12,10 +12,7 @@ class SQLTransformTest extends \PHPUnit\Framework\TestCase {
     public function testParse($query, $return, $loose_mode = false, $default_field = 'foo') {
 
         // Mock a PDO stub to do escaping.
-        $stub = $this->getMockBuilder(\PDO::class)
-                     ->disableOriginalConstructor()
-                     ->disableOriginalClone()
-                     ->getMock();
+        $stub = $this->createStub(\PDO::class);
 
         $stub->method('quote')
              ->willReturnCallback(function($e) {
