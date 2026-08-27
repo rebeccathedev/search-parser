@@ -75,6 +75,21 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
         ], $builder->calls);
     }
 
+    public function testBooleanExpressionTreeIsGrouped(): void {
+        $builder = new RecordingBuilder();
+        $query = (new SearchParser())->parseResult('status:active AND (role:admin OR NOT role:editor)')->query;
+
+        (new ElqouentTransform('name', $builder))->transform($query);
+
+        $this->assertSame([
+            ['where', ['status', '=', 'active']],
+            ['whereGroup', [
+                ['whereGroup', [['where', ['role', '=', 'admin']]]],
+                ['orWhereGroup', [['whereNotGroup', [['where', ['role', '=', 'editor']]]]]],
+            ]],
+        ], $builder->calls);
+    }
+
     public static function dataProvider() {
         return [
             [
@@ -158,6 +173,30 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                 ],
                 'loose_mode' => true
             ],
+            [
+                'query' => 'age:>=21',
+                'return' => [[
+                    'method' => 'where',
+                    'count' => 1,
+                    'with' => ['age', '>=', '21'],
+                ]],
+            ],
+            [
+                'query' => 'created:2026-01-01..',
+                'return' => [[
+                    'method' => 'where',
+                    'count' => 1,
+                    'with' => ['created', '>=', '2026-01-01'],
+                ]],
+            ],
+            [
+                'query' => 'deleted:null',
+                'return' => [[
+                    'method' => 'whereNull',
+                    'count' => 1,
+                    'with' => ['deleted'],
+                ]],
+            ],
         ];
     }
 }
@@ -166,10 +205,10 @@ class RecordingBuilder {
     public array $calls = [];
 
     public function __call(string $method, array $arguments): self {
-        if ($method === 'where' && isset($arguments[0]) && $arguments[0] instanceof \Closure) {
+        if (in_array($method, ['where', 'orWhere', 'whereNot'], true) && isset($arguments[0]) && $arguments[0] instanceof \Closure) {
             $nested = new self();
             $arguments[0]($nested);
-            $this->calls[] = ['whereGroup', $nested->calls];
+            $this->calls[] = [$method . 'Group', $nested->calls];
 
             return $this;
         }

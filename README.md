@@ -9,6 +9,10 @@ A powerful search query parser that transforms freeform search queries into stru
 - 🔌 Extensible parser system for custom query types
 - 🔒 Field filtering and mapping for security
 - 🔎 Loose mode for fuzzy matching
+- 🧠 Boolean expressions with `AND`, `OR`, `NOT`, and parentheses
+- 🩺 Structured parse diagnostics and strict mode
+- 🧱 Typed, allowlisted field schemas with column mapping
+- 🔐 Parameterized SQL output and Elasticsearch DSL
 - 🚀 PHP 8.5+ with modern type safety
 
 ## 🚀 Quick Example
@@ -17,7 +21,7 @@ A powerful search query parser that transforms freeform search queries into stru
 use RebeccaTheDev\SearchParser\SearchParser;
 
 $parser = new SearchParser();
-$query = $parser->parse('from:me@rebeccapeck.org "bar baz" !meef date:2018/01/01-2018/08/01');
+$query = $parser->parse('from:me@rebeccapeck.org "bar baz" !meef date:2018/01/01..2018/08/01');
 ```
 
 This tokenizes the search into a `SearchQuery` object with structured components:
@@ -113,6 +117,50 @@ foreach ($query as $component) {
 }
 ```
 
+For diagnostics and the boolean expression tree, use `parseResult()`:
+
+```php
+$result = $parser->parseResult('status:active AND (role:admin OR NOT role:editor)');
+
+if (!$result->isValid()) {
+    foreach ($result->diagnostics as $diagnostic) {
+        echo "{$diagnostic->message} at {$diagnostic->offset}";
+    }
+}
+```
+
+Supported field operators include comparisons, explicit ranges, open ranges,
+null checks, and existence checks:
+
+```text
+age:>=21 price:<100 created:2026-01-01.. score:..20
+deleted:null email:*
+```
+
+The legacy numeric `field:1-10` range syntax remains supported. Prefer `..`
+for new integrations because it is unambiguous with dates and hyphenated text.
+
+Backslashes escape syntax characters, including quotes, colons, commas, and
+parentheses.
+
+### Typed field schemas
+
+Schemas combine field allowlisting, value coercion, validation, and safe mapping:
+
+```php
+use RebeccaTheDev\SearchParser\Schema\{Field, Schema};
+
+$schema = new Schema([
+    'age' => Field::integer(),
+    'active' => Field::boolean(),
+    'created' => Field::date('created_at'),
+    'status' => Field::enum(['draft', 'published']),
+    'author' => Field::integer('user_id'),
+]);
+
+$validated = $schema->apply($query);
+```
+
 ### 🔧 Custom Parsers
 
 Extend the parser by implementing the `Parser` interface:
@@ -154,13 +202,26 @@ use RebeccaTheDev\SearchParser\Transforms\SQL\SQL;
 $pdo = new PDO("sqlite:/tmp/database.db");
 $transform = new SQL('default_field', $pdo);
 
-$query = $parser->parse('from:me@rebeccapeck.org "bar baz" !meef date:2018/01/01-2018/08/01');
+$query = $parser->parse('from:me@rebeccapeck.org "bar baz" !meef date:2018/01/01..2018/08/01');
 $where = $transform->transform($query);
 
 // Result:
 // `from` = me@rebeccapeck.org' and `default_field` = 'bar baz' and
 // `default_field` != 'meef' and (`date` between '2018/01/01' and '2018/08/01')
 ```
+
+For application queries, prefer bound output over an interpolated clause:
+
+```php
+$query = $parser->parseResult('status:active AND age:>=21')->query;
+$result = (new SQL('default_field'))->transformBound($query);
+
+// $result->clause  => "(`status` = :p1 AND `age` >= :p2)"
+// $result->bindings => [':p1' => 'active', ':p2' => '21']
+```
+
+`transformBound()` validates field identifiers and does not require a PDO
+connection. The original `transform()` API remains available for compatibility.
 
 ### ✨ Eloquent Transform
 
@@ -206,6 +267,18 @@ $where = $transform->transform($query);
 ```
 
 See `src/Transforms/SQL/Hashtag.php` for a working example.
+
+### Elasticsearch Transform
+
+```php
+use RebeccaTheDev\SearchParser\Transforms\Elasticsearch\Elasticsearch;
+
+$query = $parser->parseResult('status:active OR age:>=21')->query;
+$dsl = (new Elasticsearch('content'))->transform($query);
+```
+
+The adapter produces Elasticsearch `bool`, `term`, `range`, `wildcard`, and
+`exists` queries while preserving boolean grouping.
 
 ## 🛡️ Filters
 

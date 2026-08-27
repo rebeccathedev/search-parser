@@ -66,6 +66,18 @@ class SQLTransformTest extends \PHPUnit\Framework\TestCase {
             [
                 'query' => 'from:me@rebeccapeck.org,me@rebeccapeck.org',
                 'return' => "(`from` = me@rebeccapeck.org' or `from` = me@rebeccapeck.org')"
+            ],
+            [
+                'query' => 'age:>=21',
+                'return' => "`age` >= '21'"
+            ],
+            [
+                'query' => 'created:2026-01-01..',
+                'return' => "`created` >= '2026-01-01'"
+            ],
+            [
+                'query' => 'deleted:null',
+                'return' => '`deleted` is null'
             ]
         ];
     }

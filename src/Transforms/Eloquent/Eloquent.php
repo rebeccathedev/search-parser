@@ -7,6 +7,10 @@ use RebeccaTheDev\SearchParser\SearchQueryComponent;
 use RebeccaTheDev\SearchParser\Transforms\Transform;
 use RebeccaTheDev\SearchParser\Transforms\Transformation;
 use Illuminate\Database\Eloquent\Builder;
+use RebeccaTheDev\SearchParser\Expressions\ComponentExpression;
+use RebeccaTheDev\SearchParser\Expressions\Expression;
+use RebeccaTheDev\SearchParser\Expressions\LogicalExpression;
+use RebeccaTheDev\SearchParser\Expressions\NotExpression;
 
 /**
  * A class that converts a SearchQuery to a Laravel Eloquent Builder query. 
@@ -20,6 +24,11 @@ class Eloquent extends Transform {
      * @return Builder
      */
     public function transform(SearchQuery $query): mixed {
+        if ($query->expression !== null) {
+            $this->applyExpression($query->expression, $this->context);
+            return $this->context;
+        }
+
         // Loop through the query components.
         foreach ($query as $component) {
             // Call the user defined transforms if any.
@@ -60,6 +69,37 @@ class Eloquent extends Transform {
         return $this->context;
     }
 
+    private function applyExpression(Expression $expression, mixed $context): void {
+        if ($expression instanceof LogicalExpression) {
+            if ($expression->operator === 'AND') {
+                $this->applyExpression($expression->left, $context);
+                $this->applyExpression($expression->right, $context);
+                return;
+            }
+            $context->where(function ($group) use ($expression): void {
+                $group->where(function ($left) use ($expression): void {
+                    $this->applyExpression($expression->left, $left);
+                });
+                $group->orWhere(function ($right) use ($expression): void {
+                    $this->applyExpression($expression->right, $right);
+                });
+            });
+            return;
+        }
+        if ($expression instanceof NotExpression) {
+            $context->whereNot(function ($group) use ($expression): void {
+                $this->applyExpression($expression->expression, $group);
+            });
+            return;
+        }
+
+        foreach ($this->transforms as $transform) {
+            $message = $transform->transformComponent($expression->component, $this->defaultField, $context);
+            if ($message->isDirty()) { return; }
+        }
+        $this->transformComponent($expression->component, $this->defaultField, $context);
+    }
+
     /**
      * Transforms a SearchQueryComponent and sets the appropriate methods on an
      * Eloquent Builder object.
@@ -82,6 +122,18 @@ class Eloquent extends Transform {
         // If the component is anything other than a ranged query, we treat them
         // the same.
         if ($component->type != SearchQueryComponent::RANGE) {
+            if ($component->operator === 'is-null') {
+                $method = $component->negate ? 'whereNotNull' : 'whereNull';
+                $context->{$method}($field);
+                $transformation->setMessage($context);
+                return $transformation;
+            }
+            if ($component->operator === 'exists') {
+                $method = $component->negate ? 'whereNull' : 'whereNotNull';
+                $context->{$method}($field);
+                $transformation->setMessage($context);
+                return $transformation;
+            }
             $value = $component->value;
 
             // If the value is an array, that means we are OR'ing a bunch of the
@@ -97,10 +149,11 @@ class Eloquent extends Transform {
                                 $component->type,
                                 $innerValue,
                                 $field,
-                                $component->negate
+                                $component->negate,
+                                $component->operator
                             );
 
-                        $method = $index === 0 ? 'where' : 'orWhere';
+                        $method = $index === 0 || $component->negate ? 'where' : 'orWhere';
                         $query->{$method}($comparisonField, $comparator, $comparisonValue);
                     }
                 });
@@ -114,7 +167,8 @@ class Eloquent extends Transform {
                         $component->type,
                         $value,
                         $field,
-                        $component->negate
+                        $component->negate,
+                        $component->operator
                     );
 
                 // Call the standard where.
@@ -123,7 +177,11 @@ class Eloquent extends Transform {
             
         // On a range query, call the correct methods.
         } else {
-            if ($component->negate) {
+            if ($component->firstRangeValue === null) {
+                $context->where($field, $component->negate ? '>' : '<=', $component->secondRangeValue);
+            } elseif ($component->secondRangeValue === null) {
+                $context->where($field, $component->negate ? '<' : '>=', $component->firstRangeValue);
+            } elseif ($component->negate) {
                 $context->whereNotBetween($field, [$component->firstRangeValue, $component->secondRangeValue]);
             } else {
                 $context->whereBetween($field, [$component->firstRangeValue, $component->secondRangeValue]);
@@ -146,9 +204,9 @@ class Eloquent extends Transform {
      * @param boolean $negate
      * @return array
      */
-    private function transformIntoSearchComparison(string $type, string $value, string $field, $negate = false) {
+    private function transformIntoSearchComparison(string $type, string $value, string $field, $negate = false, string $operator = '=') {
         $query = [];
-        $comparator = "=";
+        $comparator = $operator;
 
         if ($type != SearchQueryComponent::FIELD && $this->looseMode) {
             $comparator = $negate ? 'not like' : 'like';
@@ -166,7 +224,9 @@ class Eloquent extends Transform {
 
         // Otherwise, this is a standard equality search.
         } else {
-            $comparator = $negate ? '!=' : '=';
+            $comparator = $negate
+                ? (['=' => '!=', '!=' => '=', '>' => '<=', '>=' => '<', '<' => '>=', '<=' => '>'][$operator] ?? $operator)
+                : $operator;
         }
 
         return [

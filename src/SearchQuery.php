@@ -5,7 +5,8 @@ namespace RebeccaTheDev\SearchParser;
 /**
  * A class that holds a tokenized query.
  */
-class SearchQuery implements \Iterator {
+class SearchQuery implements \Iterator, \Countable, \JsonSerializable {
+    public ?\RebeccaTheDev\SearchParser\Expressions\Expression $expression = null;
     /**
      * Internal var that holds the iterator position.
      *
@@ -116,5 +117,18 @@ class SearchQuery implements \Iterator {
                 return;
             }
         }
+    }
+
+    /** @return list<SearchQueryComponent> */
+    public function toArray(): array {
+        return array_values($this->data);
+    }
+
+    public function count(): int {
+        return count($this->data);
+    }
+
+    public function jsonSerialize(): array {
+        return ['components' => $this->toArray(), 'expression' => $this->expression];
     }
 }
