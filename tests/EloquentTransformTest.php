@@ -4,6 +4,8 @@ namespace RebeccaTheDev\SearchParser\SearchParser\Tests;
 
 use RebeccaTheDev\SearchParser\SearchParser;
 use RebeccaTheDev\SearchParser\Transforms\Eloquent\Eloquent as ElqouentTransform;
+use RebeccaTheDev\SearchParser\Parsers\Hashtag as HashtagParser;
+use RebeccaTheDev\SearchParser\Transforms\Eloquent\Hashtag as HashtagTransform;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
@@ -36,6 +38,41 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
 
             $this->assertSame($expectedCalls, $builder->calls);
         }
+    }
+
+    public function testMultipleFieldValuesAreGrouped(): void {
+        $builder = new RecordingBuilder();
+        $parser = new SearchParser();
+        $query = $parser->parse('status:active role:admin,editor verified:true');
+
+        $transform = new ElqouentTransform('name', $builder);
+        $transform->transform($query);
+
+        $this->assertSame([
+            ['where', ['status', '=', 'active']],
+            ['whereGroup', [
+                ['where', ['role', '=', 'admin']],
+                ['orWhere', ['role', '=', 'editor']],
+            ]],
+            ['where', ['verified', '=', 'true']],
+        ], $builder->calls);
+    }
+
+    public function testHashtagComponentTransform(): void {
+        $builder = new RecordingBuilder();
+        $parser = new SearchParser();
+        $parser->addParser(new HashtagParser());
+        $query = $parser->parse('#php');
+
+        $transform = new ElqouentTransform('name', $builder);
+        $hashtagTransform = new HashtagTransform();
+        $hashtagTransform->hashtagField = 'tag_name';
+        $transform->addComponentTransform($hashtagTransform);
+        $transform->transform($query);
+
+        $this->assertSame([
+            ['where', ['tag_name', 'php']],
+        ], $builder->calls);
     }
 
     public static function dataProvider() {
@@ -101,14 +138,12 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                 'query' => 'from:me@rebeccapeck.org,me@rebeccapeck.org',
                 'return' => [
                     [
-                        'method' => 'where',
+                        'method' => 'whereGroup',
                         'count' => 1,
-                        'with' => ['from', '=', me@rebeccapeck.org']
-                    ],
-                    [
-                        'method' => 'orWhere',
-                        'count' => 1,
-                        'with' => ['from', '=', me@rebeccapeck.org']
+                        'with' => [
+                            ['where', ['from', '=', me@rebeccapeck.org']],
+                            ['orWhere', ['from', '=', me@rebeccapeck.org']],
+                        ]
                     ]
                 ]
             ],
@@ -131,6 +166,14 @@ class RecordingBuilder {
     public array $calls = [];
 
     public function __call(string $method, array $arguments): self {
+        if ($method === 'where' && isset($arguments[0]) && $arguments[0] instanceof \Closure) {
+            $nested = new self();
+            $arguments[0]($nested);
+            $this->calls[] = ['whereGroup', $nested->calls];
+
+            return $this;
+        }
+
         $this->calls[] = [$method, $arguments];
 
         return $this;

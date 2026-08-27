@@ -1,6 +1,6 @@
 <?php
 
-namespace RebeccaTheDev\SearchParser\Transforms\Eloqent;
+namespace RebeccaTheDev\SearchParser\Transforms\Eloquent;
 
 use RebeccaTheDev\SearchParser\Transforms\TransformsComponents;
 use RebeccaTheDev\SearchParser\Transforms\Transformation;
@@ -13,7 +13,7 @@ class Hashtag implements TransformsComponents {
         $transformation = new Transformation();
         
         if ($component->type == 'hashtag') {
-            $context->where($hashtagField, $component->value);
+            $context->where($this->hashtagField, $component->value);
             $transformation->setMessage($context);
         }
 

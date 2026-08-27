@@ -87,29 +87,23 @@ class Eloquent extends Transform {
             // If the value is an array, that means we are OR'ing a bunch of the
             // same fields together.
             if (is_array($value)) {
+                // Keep alternatives in a nested WHERE group. Without the
+                // closure, a later OR can escape the surrounding AND clauses:
+                // `status = active AND role = admin OR role = editor`.
+                $context->where(function ($query) use ($value, $component, $field): void {
+                    foreach ($value as $index => $innerValue) {
+                        [$comparisonField, $comparator, $comparisonValue] =
+                            $this->transformIntoSearchComparison(
+                                $component->type,
+                                $innerValue,
+                                $field,
+                                $component->negate
+                            );
 
-                // We have to keep track of this because of the way Eloquent
-                // query builder works.
-                $first = true;
-                foreach ($value as $inner_value) {
-
-                    // Transform the search to check for various things.
-                    list($field, $comparator, $inner_value) = 
-                        $this->transformIntoSearchComparison(
-                            $component->type,
-                            $inner_value,
-                            $field,
-                            $component->negate
-                        );
-
-                    // Now, call the correct method.
-                    if ($first) {
-                        $context->where($field, $comparator, $inner_value);
-                        $first = false;
-                    } else {
-                        $context->orWhere($field, $comparator, $inner_value);
+                        $method = $index === 0 ? 'where' : 'orWhere';
+                        $query->{$method}($comparisonField, $comparator, $comparisonValue);
                     }
-                }
+                });
                 
             // Just a standard query otherwise.
             } else if (is_string($value)) {
