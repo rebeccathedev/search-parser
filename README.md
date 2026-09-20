@@ -367,3 +367,6 @@ MIT License - see LICENSE file for details.
 ## 👩‍💻 Author
 
 Made with 🩷 by [Rebecca Peck](https://github.com/rebeccathedev)
+
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q3W726YTHU)
