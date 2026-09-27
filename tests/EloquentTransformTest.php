@@ -102,7 +102,7 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => ['from', '=', me@rebeccapeck.org']
+                        'with' => ['from', '=', 'me@rebeccapeck.org']
                     ]
                 ]
             ],
@@ -112,7 +112,7 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                     [
                         'method' => 'where',
                         'count' => 1,
-                        'with' => ['from', '!=', me@rebeccapeck.org']
+                        'with' => ['from', '!=', 'me@rebeccapeck.org']
                     ]
                 ]
             ],
@@ -143,7 +143,7 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                         'method' => 'where',
                         'count' => 2,
                         'withConsecutive' => [
-                            ['from', '=', me@rebeccapeck.org'],
+                            ['from', '=', 'me@rebeccapeck.org'],
                             ['foo', '=', 'foo bar']
                         ]
                     ]
@@ -156,8 +156,8 @@ class EloquentTransformTest extends \PHPUnit\Framework\TestCase {
                         'method' => 'whereGroup',
                         'count' => 1,
                         'with' => [
-                            ['where', ['from', '=', me@rebeccapeck.org']],
-                            ['orWhere', ['from', '=', me@rebeccapeck.org']],
+                            ['where', ['from', '=', 'me@rebeccapeck.org']],
+                            ['orWhere', ['from', '=', 'me@rebeccapeck.org']],
                         ]
                     ]
                 ]

@@ -40,11 +40,11 @@ class SQLTransformTest extends \PHPUnit\Framework\TestCase {
             ],
             [
                 'query' => 'from:me@rebeccapeck.org',
-                'return' => "`from` = me@rebeccapeck.org'"
+                'return' => "`from` = 'me@rebeccapeck.org'"
             ],
             [
                 'query' => '!from:me@rebeccapeck.org',
-                'return' => "`from` != me@rebeccapeck.org'"
+                'return' => "`from` != 'me@rebeccapeck.org'"
             ],
             [
                 'query' => 'range:1-10',
@@ -61,11 +61,11 @@ class SQLTransformTest extends \PHPUnit\Framework\TestCase {
             ],
             [
                 'query' => 'from:me@rebeccapeck.org "foo bar"',
-                'return' => "`from` = me@rebeccapeck.org' and `foo` = 'foo bar'"
+                'return' => "`from` = 'me@rebeccapeck.org' and `foo` = 'foo bar'"
             ],
             [
                 'query' => 'from:me@rebeccapeck.org,me@rebeccapeck.org',
-                'return' => "(`from` = me@rebeccapeck.org' or `from` = me@rebeccapeck.org')"
+                'return' => "(`from` = 'me@rebeccapeck.org' or `from` = 'me@rebeccapeck.org')"
             ],
             [
                 'query' => 'age:>=21',

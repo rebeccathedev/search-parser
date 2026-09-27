@@ -54,7 +54,7 @@ class FilterTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type' => 'field',
                         'field' => 'from',
-                        'value' => me@rebeccapeck.org'
+                        'value' => 'me@rebeccapeck.org'
                     ]
                 ]
             ],
@@ -70,7 +70,7 @@ class FilterTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type' => 'field',
                         'field' => 'recipient',
-                        'value' => me@rebeccapeck.org'
+                        'value' => 'me@rebeccapeck.org'
                     ]
                 ]
             ]

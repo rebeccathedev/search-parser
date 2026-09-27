@@ -42,7 +42,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type'  => 'field',
                         'field' => 'from',
-                        'value' => me@rebeccapeck.org'
+                        'value' => 'me@rebeccapeck.org'
                     ]
                 ]
             ],
@@ -52,7 +52,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type'   => 'field',
                         'field'  => 'from',
-                        'value'  => me@rebeccapeck.org',
+                        'value'  => 'me@rebeccapeck.org',
                         'negate' => true
                     ]
                 ]
@@ -84,7 +84,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type'  => 'field',
                         'field' => 'from',
-                        'value' => me@rebeccapeck.org'
+                        'value' => 'me@rebeccapeck.org'
                     ],
                     [
                         'type'  => 'text',
@@ -99,7 +99,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
                     [
                         'type'  => 'field',
                         'field' => 'from',
-                        'value' => [me@rebeccapeck.org', me@rebeccapeck.org']
+                        'value' => ['me@rebeccapeck.org', 'me@rebeccapeck.org']
                     ]
                 ]
             ],
