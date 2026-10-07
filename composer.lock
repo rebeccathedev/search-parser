@@ -9,23 +9,24 @@
     "packages-dev": [
         {
             "name": "brick/math",
-            "version": "0.19.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce"
+                "reference": "2effe05d2177c451b86c6a073196a4034c02f211"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce",
-                "reference": "a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce",
+                "url": "https://api.github.com/repos/brick/math/zipball/2effe05d2177c451b86c6a073196a4034c02f211",
+                "reference": "2effe05d2177c451b86c6a073196a4034c02f211",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.2"
             },
             "require-dev": {
-                "phpstan/phpstan": "2.1.22",
+                "phpstan/phpstan": "2.2.13",
+                "phpstan/phpstan-phpunit": "2.0.18",
                 "phpunit/phpunit": "^11.5"
             },
             "type": "library",
@@ -56,7 +57,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.19.1"
+                "source": "https://github.com/brick/math/tree/1.0.0"
             },
             "funding": [
                 {
@@ -64,20 +65,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-08T23:03:16+00:00"
+            "time": "2026-09-12T10:28:18+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon-doctrine-types.git",
-                "reference": "18ba5ddfec8976260ead6e866180bd5d2f71aa1d"
+                "reference": "5fa5eacafd9ef47c8c6ab9143fc901ba0194d3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/18ba5ddfec8976260ead6e866180bd5d2f71aa1d",
-                "reference": "18ba5ddfec8976260ead6e866180bd5d2f71aa1d",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/5fa5eacafd9ef47c8c6ab9143fc901ba0194d3dc",
+                "reference": "5fa5eacafd9ef47c8c6ab9143fc901ba0194d3dc",
                 "shasum": ""
             },
             "require": {
@@ -92,6 +93,11 @@
                 "phpunit/phpunit": "^10.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
@@ -104,7 +110,7 @@
             "authors": [
                 {
                     "name": "KyleKatarn",
-                    "email": "me@rebeccapeck.org"
+                    "email": "kylekatarnls@gmail.com"
                 }
             ],
             "description": "Types to use Carbon in Doctrine",
@@ -117,7 +123,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CarbonPHP/carbon-doctrine-types/issues",
-                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/3.2.0"
+                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/3.2.1"
             },
             "funding": [
                 {
@@ -133,7 +139,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T16:56:22+00:00"
+            "time": "2026-09-06T14:11:38+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -172,23 +178,23 @@
             "authors": [
                 {
                     "name": "Guilherme Blanco",
-                    "email": "me@rebeccapeck.org"
+                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Roman Borschel",
-                    "email": "me@rebeccapeck.org"
+                    "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
-                    "email": "me@rebeccapeck.org"
+                    "email": "kontakt@beberlei.de"
                 },
                 {
                     "name": "Jonathan Wage",
-                    "email": "me@rebeccapeck.org"
+                    "email": "jonwage@gmail.com"
                 },
                 {
                     "name": "Johannes Schmitt",
-                    "email": "me@rebeccapeck.org"
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.",
@@ -227,16 +233,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "e89523328db4947d0a239de5607823402c414825"
+                "reference": "6eebd20c5ec8958a782008aea1374e9600cf8135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/e89523328db4947d0a239de5607823402c414825",
-                "reference": "e89523328db4947d0a239de5607823402c414825",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/6eebd20c5ec8958a782008aea1374e9600cf8135",
+                "reference": "6eebd20c5ec8958a782008aea1374e9600cf8135",
                 "shasum": ""
             },
             "require": {
@@ -274,7 +280,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Collections package.",
@@ -283,11 +289,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-08-07T13:46:56+00:00"
+            "time": "2026-10-02T12:50:49+00:00"
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -320,7 +326,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Conditionable package.",
@@ -333,16 +339,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "e6a04c60ae5cc6cc9ff30fbb4a32c076de914fa2"
+                "reference": "3cd79c13d89ba8ef04a40c5cf45fd7c13e71f44d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/e6a04c60ae5cc6cc9ff30fbb4a32c076de914fa2",
-                "reference": "e6a04c60ae5cc6cc9ff30fbb4a32c076de914fa2",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/3cd79c13d89ba8ef04a40c5cf45fd7c13e71f44d",
+                "reference": "3cd79c13d89ba8ef04a40c5cf45fd7c13e71f44d",
                 "shasum": ""
             },
             "require": {
@@ -382,7 +388,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Container package.",
@@ -391,20 +397,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-08-20T09:53:45+00:00"
+            "time": "2026-09-06T21:12:06+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "52fd3118b71254dd083eca6acba39b3f7325ec9a"
+                "reference": "0cabe75392aad93ac739bbb220a3f5d943b12b30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/52fd3118b71254dd083eca6acba39b3f7325ec9a",
-                "reference": "52fd3118b71254dd083eca6acba39b3f7325ec9a",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/0cabe75392aad93ac739bbb220a3f5d943b12b30",
+                "reference": "0cabe75392aad93ac739bbb220a3f5d943b12b30",
                 "shasum": ""
             },
             "require": {
@@ -430,7 +436,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Contracts package.",
@@ -439,24 +445,24 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-08-10T17:21:54+00:00"
+            "time": "2026-09-25T12:59:28+00:00"
         },
         {
             "name": "illuminate/database",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "3c1cddc391b81d6de6a546141b04a9ba08cd3376"
+                "reference": "576d4f1679bd754ce038f4147a079bfc96c68aa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/3c1cddc391b81d6de6a546141b04a9ba08cd3376",
-                "reference": "3c1cddc391b81d6de6a546141b04a9ba08cd3376",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/576d4f1679bd754ce038f4147a079bfc96c68aa2",
+                "reference": "576d4f1679bd754ce038f4147a079bfc96c68aa2",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17 || ^0.18 || ^0.19",
+                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17 || ^0.18 || ^0.19 || ^0.20 || ^1.0",
                 "ext-pdo": "*",
                 "illuminate/collections": "^13.0",
                 "illuminate/conditionable": "^13.0",
@@ -498,7 +504,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Database package.",
@@ -513,11 +519,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-08-25T20:54:30+00:00"
+            "time": "2026-10-05T15:55:08+00:00"
         },
         {
             "name": "illuminate/macroable",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -550,7 +556,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Macroable package.",
@@ -563,7 +569,7 @@
         },
         {
             "name": "illuminate/reflection",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/reflection.git",
@@ -601,7 +607,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Reflection package.",
@@ -614,16 +620,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v13.29.0",
+            "version": "v13.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "e034c3ddd544e164c3f5d8baa879798907b96a28"
+                "reference": "ca230c018111767a6dd7cab7b157ef346801454a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/e034c3ddd544e164c3f5d8baa879798907b96a28",
-                "reference": "e034c3ddd544e164c3f5d8baa879798907b96a28",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/ca230c018111767a6dd7cab7b157ef346801454a",
+                "reference": "ca230c018111767a6dd7cab7b157ef346801454a",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +686,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "The Illuminate Support package.",
@@ -689,20 +695,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-08-25T15:03:19+00:00"
+            "time": "2026-10-05T15:51:39+00:00"
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v2.0.16",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "7cfc24e4fa2cca045fb8dd2a797a2b2b13b655ed"
+                "reference": "2d5869a838bbcf37e0d8b0568fc41914e81374b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/7cfc24e4fa2cca045fb8dd2a797a2b2b13b655ed",
-                "reference": "7cfc24e4fa2cca045fb8dd2a797a2b2b13b655ed",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/2d5869a838bbcf37e0d8b0568fc41914e81374b5",
+                "reference": "2d5869a838bbcf37e0d8b0568fc41914e81374b5",
                 "shasum": ""
             },
             "require": {
@@ -733,11 +739,11 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "me@rebeccapeck.org"
+                    "email": "taylor@laravel.com"
                 },
                 {
                     "name": "Nuno Maduro",
-                    "email": "me@rebeccapeck.org"
+                    "email": "nuno@laravel.com"
                 }
             ],
             "description": "Laravel Serializable Closure provides an easy and secure way to serialize closures in PHP.",
@@ -750,7 +756,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2026-08-18T20:28:54+00:00"
+            "time": "2026-09-22T14:32:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -814,16 +820,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.13.2",
+            "version": "3.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "a1c54919f5fff9800cd03c32bd01defd5a4061cb"
+                "reference": "94cfc34887f07ab5c0efa07914c8f527544e3224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/a1c54919f5fff9800cd03c32bd01defd5a4061cb",
-                "reference": "a1c54919f5fff9800cd03c32bd01defd5a4061cb",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/94cfc34887f07ab5c0efa07914c8f527544e3224",
+                "reference": "94cfc34887f07ab5c0efa07914c8f527544e3224",
                 "shasum": ""
             },
             "require": {
@@ -843,7 +849,7 @@
                 "doctrine/orm": "^2.15.2 || ^3.0",
                 "friendsofphp/php-cs-fixer": "^v3.87.1",
                 "kylekatarnls/multi-tester": "^2.5.3",
-                "phpmd/phpmd": "^2.15.0",
+                "phpmd/phpmd": "^3.0@dev",
                 "phpstan/extension-installer": "^1.4.3",
                 "phpstan/phpstan": "^2.1.22",
                 "phpunit/phpunit": "^10.5.53",
@@ -881,7 +887,7 @@
             "authors": [
                 {
                     "name": "Brian Nesbitt",
-                    "email": "me@rebeccapeck.org",
+                    "email": "brian@nesbot.com",
                     "homepage": "https://markido.com"
                 },
                 {
@@ -915,20 +921,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-08T11:40:35+00:00"
+            "time": "2026-10-02T07:26:52+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.8.0",
+            "version": "v5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f"
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9e33da9553fe7786f0962b35f4e4ecf01be89def",
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def",
                 "shasum": ""
             },
             "require": {
@@ -970,9 +976,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.8.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.9.0"
             },
-            "time": "2026-07-04T14:30:18+00:00"
+            "time": "2026-09-13T18:51:52+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1014,17 +1020,17 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "me@rebeccapeck.org",
+                    "email": "arne@blankerts.de",
                     "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpeople.de",
                     "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "Developer"
                 }
             ],
@@ -1071,17 +1077,17 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "me@rebeccapeck.org",
+                    "email": "arne@blankerts.de",
                     "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpeople.de",
                     "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "Developer"
                 }
             ],
@@ -1094,16 +1100,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "14.3.1",
+            "version": "14.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6ce313bb110384148d1dc7695a99175f59529069"
+                "reference": "f1e54f06b6b4cea73cd6104ba3c0cfa0efa6d73f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ce313bb110384148d1dc7695a99175f59529069",
-                "reference": "6ce313bb110384148d1dc7695a99175f59529069",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f1e54f06b6b4cea73cd6104ba3c0cfa0efa6d73f",
+                "reference": "f1e54f06b6b4cea73cd6104ba3c0cfa0efa6d73f",
                 "shasum": ""
             },
             "require": {
@@ -1111,18 +1117,18 @@
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^5.8.0",
+                "nikic/php-parser": "^5.9.0",
                 "php": ">=8.4",
-                "phpunit/php-text-template": "^6.0",
+                "phpunit/php-text-template": "^6.0.1",
                 "sebastian/complexity": "^6.0",
-                "sebastian/environment": "^9.3.2",
+                "sebastian/environment": "^9.3.3",
                 "sebastian/git-state": "^1.0",
                 "sebastian/lines-of-code": "^5.0.2",
                 "sebastian/version": "^7.0",
                 "theseer/tokenizer": "^2.0.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.3.1"
+                "phpunit/phpunit": "^13.3.6"
             },
             "suggest": {
                 "ext-pcov": "PHP extension that provides line coverage",
@@ -1131,7 +1137,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "14.3.x-dev"
+                    "dev-main": "14.4.x-dev"
                 }
             },
             "autoload": {
@@ -1146,7 +1152,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1160,7 +1166,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.3.1"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.4.1"
             },
             "funding": [
                 {
@@ -1180,7 +1186,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-16T05:23:47+00:00"
+            "time": "2026-10-03T14:05:38+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1220,7 +1226,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1297,7 +1303,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1333,23 +1339,23 @@
         },
         {
             "name": "phpunit/php-text-template",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
-                "reference": "a47af19f93f76aa3368303d752aa5272ca3299f4"
+                "reference": "97107691cb2b6c743b5e0c44be19e983cb337a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/a47af19f93f76aa3368303d752aa5272ca3299f4",
-                "reference": "a47af19f93f76aa3368303d752aa5272ca3299f4",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/97107691cb2b6c743b5e0c44be19e983cb337a02",
+                "reference": "97107691cb2b6c743b5e0c44be19e983cb337a02",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.0"
+                "phpunit/phpunit": "^13.3.6"
             },
             "type": "library",
             "extra": {
@@ -1369,7 +1375,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1381,7 +1387,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-text-template/issues",
                 "security": "https://github.com/sebastianbergmann/php-text-template/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-text-template/tree/6.0.0"
+                "source": "https://github.com/sebastianbergmann/php-text-template/tree/6.0.1"
             },
             "funding": [
                 {
@@ -1401,7 +1407,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-06T04:36:37+00:00"
+            "time": "2026-10-03T04:54:24+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -1441,7 +1447,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1477,16 +1483,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "13.3.1",
+            "version": "13.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fc024931d6ad047404e9d86536735923fe63a06b"
+                "reference": "ccde40327c501eebff192614b0dcf11806418901"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fc024931d6ad047404e9d86536735923fe63a06b",
-                "reference": "fc024931d6ad047404e9d86536735923fe63a06b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ccde40327c501eebff192614b0dcf11806418901",
+                "reference": "ccde40327c501eebff192614b0dcf11806418901",
                 "shasum": ""
             },
             "require": {
@@ -1500,15 +1506,15 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.4.1",
-                "phpunit/php-code-coverage": "^14.3",
-                "phpunit/php-file-iterator": "^7.0.1",
+                "phpunit/php-code-coverage": "^14.4.1",
+                "phpunit/php-file-iterator": "^7.0.2",
                 "phpunit/php-invoker": "^7.0.0",
-                "phpunit/php-text-template": "^6.0.0",
+                "phpunit/php-text-template": "^6.0.1",
                 "phpunit/php-timer": "^9.0.0",
                 "sebastian/cli-parser": "^5.0.1",
                 "sebastian/comparator": "^8.4",
-                "sebastian/diff": "^9.0",
-                "sebastian/environment": "^9.3.2",
+                "sebastian/diff": "^9.0.1",
+                "sebastian/environment": "^9.3.3",
                 "sebastian/exporter": "^8.2.1",
                 "sebastian/file-filter": "^1.0",
                 "sebastian/git-state": "^1.0",
@@ -1516,7 +1522,7 @@
                 "sebastian/object-enumerator": "^8.1.0",
                 "sebastian/recursion-context": "^8.0.1",
                 "sebastian/type": "^7.0.2",
-                "sebastian/version": "^7.0.0",
+                "sebastian/version": "^7.0.1",
                 "staabm/side-effects-detector": "^1.0.5"
             },
             "bin": [
@@ -1525,7 +1531,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "13.3-dev"
+                    "dev-main": "13.4-dev"
                 }
             },
             "autoload": {
@@ -1543,7 +1549,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1557,7 +1563,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.3.1"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.4.1"
             },
             "funding": [
                 {
@@ -1565,7 +1571,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-08-13T13:14:23+00:00"
+            "time": "2026-10-05T05:51:21+00:00"
         },
         {
             "name": "psr/clock",
@@ -1757,7 +1763,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1833,19 +1839,19 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 },
                 {
                     "name": "Jeff Welch",
-                    "email": "me@rebeccapeck.org"
+                    "email": "whatthejeff@gmail.com"
                 },
                 {
                     "name": "Volker Dusch",
-                    "email": "me@rebeccapeck.org"
+                    "email": "github@wallbash.com"
                 },
                 {
                     "name": "Bernhard Schussek",
-                    "email": "me@rebeccapeck.org"
+                    "email": "bschussek@2bepublished.at"
                 }
             ],
             "description": "Provides the functionality to compare PHP values for equality",
@@ -1919,7 +1925,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -1989,11 +1995,11 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 },
                 {
                     "name": "Kore Nordmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "mail@kore-nordmann.de"
                 }
             ],
             "description": "Diff implementation",
@@ -2031,23 +2037,23 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "9.3.2",
+            "version": "9.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e"
+                "reference": "d4dd10267a11055066a2a78ae04583d8ddd4f595"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e",
-                "reference": "6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/d4dd10267a11055066a2a78ae04583d8ddd4f595",
+                "reference": "d4dd10267a11055066a2a78ae04583d8ddd4f595",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.1.11"
+                "phpunit/phpunit": "^13.3.6"
             },
             "suggest": {
                 "ext-posix": "*"
@@ -2070,7 +2076,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Provides functionality to handle HHVM/PHP environments",
@@ -2083,7 +2089,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/9.3.2"
+                "source": "https://github.com/sebastianbergmann/environment/tree/9.3.3"
             },
             "funding": [
                 {
@@ -2103,7 +2109,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-25T13:41:38+00:00"
+            "time": "2026-10-01T12:37:56+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -2145,23 +2151,23 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 },
                 {
                     "name": "Jeff Welch",
-                    "email": "me@rebeccapeck.org"
+                    "email": "whatthejeff@gmail.com"
                 },
                 {
                     "name": "Volker Dusch",
-                    "email": "me@rebeccapeck.org"
+                    "email": "github@wallbash.com"
                 },
                 {
                     "name": "Adam Harvey",
-                    "email": "me@rebeccapeck.org"
+                    "email": "aharvey@php.net"
                 },
                 {
                     "name": "Bernhard Schussek",
-                    "email": "me@rebeccapeck.org"
+                    "email": "bschussek@gmail.com"
                 }
             ],
             "description": "Provides the functionality to export PHP variables for visualization",
@@ -2233,7 +2239,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -2302,7 +2308,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -2374,7 +2380,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Snapshotting of global state",
@@ -2446,7 +2452,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -2516,7 +2522,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
@@ -2584,7 +2590,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
@@ -2652,15 +2658,15 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org"
+                    "email": "sebastian@phpunit.de"
                 },
                 {
                     "name": "Jeff Welch",
-                    "email": "me@rebeccapeck.org"
+                    "email": "whatthejeff@gmail.com"
                 },
                 {
                     "name": "Adam Harvey",
-                    "email": "me@rebeccapeck.org"
+                    "email": "aharvey@php.net"
                 }
             ],
             "description": "Provides functionality to recursively process PHP variables",
@@ -2728,7 +2734,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -2761,16 +2767,16 @@
         },
         {
             "name": "sebastian/version",
-            "version": "7.0.0",
+            "version": "7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/version.git",
-                "reference": "ad37a5552c8e2b88572249fdc19b6da7792e021b"
+                "reference": "f1598cf1d8d1ca4c0f194a52f2fe72a559a7b0b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/ad37a5552c8e2b88572249fdc19b6da7792e021b",
-                "reference": "ad37a5552c8e2b88572249fdc19b6da7792e021b",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/f1598cf1d8d1ca4c0f194a52f2fe72a559a7b0b1",
+                "reference": "f1598cf1d8d1ca4c0f194a52f2fe72a559a7b0b1",
                 "shasum": ""
             },
             "require": {
@@ -2794,7 +2800,7 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "me@rebeccapeck.org",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -2803,7 +2809,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/version/issues",
                 "security": "https://github.com/sebastianbergmann/version/security/policy",
-                "source": "https://github.com/sebastianbergmann/version/tree/7.0.0"
+                "source": "https://github.com/sebastianbergmann/version/tree/7.0.1"
             },
             "funding": [
                 {
@@ -2823,7 +2829,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-06T04:52:52+00:00"
+            "time": "2026-10-04T05:51:14+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
@@ -2917,7 +2923,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -2956,16 +2962,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.38.2",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
                 "shasum": ""
             },
             "require": {
@@ -3000,7 +3006,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3017,7 +3023,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -3037,20 +3043,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-27T06:59:30+00:00"
+            "time": "2026-09-24T15:19:04+00:00"
         },
         {
             "name": "symfony/polyfill-php84",
-            "version": "v1.38.1",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php84.git",
-                "reference": "f4e1dfaee5b74aba5964fe1fd4dfc7ba5e3085fa"
+                "reference": "22c6548499cbe5c5bb072fc0c42312dff062a015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php84/zipball/f4e1dfaee5b74aba5964fe1fd4dfc7ba5e3085fa",
-                "reference": "f4e1dfaee5b74aba5964fe1fd4dfc7ba5e3085fa",
+                "url": "https://api.github.com/repos/symfony/polyfill-php84/zipball/22c6548499cbe5c5bb072fc0c42312dff062a015",
+                "reference": "22c6548499cbe5c5bb072fc0c42312dff062a015",
                 "shasum": ""
             },
             "require": {
@@ -3081,7 +3087,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3097,7 +3103,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php84/tree/v1.38.1"
+                "source": "https://github.com/symfony/polyfill-php84/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -3117,20 +3123,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-26T12:51:13+00:00"
+            "time": "2026-09-23T22:01:09+00:00"
         },
         {
             "name": "symfony/polyfill-php85",
-            "version": "v1.41.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php85.git",
-                "reference": "255fab485aaa1006ed411040c42aecd7b5302d7a"
+                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/255fab485aaa1006ed411040c42aecd7b5302d7a",
-                "reference": "255fab485aaa1006ed411040c42aecd7b5302d7a",
+                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/86a42cbcc07adc331481a5ab310a4024bfc227f6",
+                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6",
                 "shasum": ""
             },
             "require": {
@@ -3161,7 +3167,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3177,7 +3183,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php85/tree/v1.41.0"
+                "source": "https://github.com/symfony/polyfill-php85/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -3197,20 +3203,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-01T12:47:55+00:00"
+            "time": "2026-09-25T15:46:47+00:00"
         },
         {
             "name": "symfony/polyfill-php86",
-            "version": "v1.41.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php86.git",
-                "reference": "6bc356ed3d8dbfeea8f0de235e34d670704e880e"
+                "reference": "8840df45b24f33a49dc419fa18dc0057231ae1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php86/zipball/6bc356ed3d8dbfeea8f0de235e34d670704e880e",
-                "reference": "6bc356ed3d8dbfeea8f0de235e34d670704e880e",
+                "url": "https://api.github.com/repos/symfony/polyfill-php86/zipball/8840df45b24f33a49dc419fa18dc0057231ae1d8",
+                "reference": "8840df45b24f33a49dc419fa18dc0057231ae1d8",
                 "shasum": ""
             },
             "require": {
@@ -3241,7 +3247,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3257,7 +3263,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php86/tree/v1.41.0"
+                "source": "https://github.com/symfony/polyfill-php86/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -3277,7 +3283,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-02T13:42:24+00:00"
+            "time": "2026-09-25T15:46:47+00:00"
         },
         {
             "name": "symfony/translation",
@@ -3340,7 +3346,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "me@rebeccapeck.org"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3414,7 +3420,7 @@
             "authors": [
                 {
                     "name": "Nicolas Grekas",
-                    "email": "me@rebeccapeck.org"
+                    "email": "p@tchwork.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -3487,7 +3493,7 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "me@rebeccapeck.org",
+                    "email": "arne@blankerts.de",
                     "role": "Developer"
                 }
             ],
